@@ -51,18 +51,24 @@ int mcd(int a, int b)
 		return mcd(a, b >> 1);
 	return mcd((abs(a) - abs(b)) >> 1, b);
 }
-void inversa(int a, int n)
+int inversa(int a, int n)
 {
 	if (mcd(n, a) == 1)
 	{
 		int x = euclides_ext(a, n);
-		if (modulo(a * x, n) == 1)
-			cout << "la inversa de " << a << " es " << x;
+		if (x > 0)
+		{
+			if (modulo(a * x, n) == 1)
+				return x;
+			else
+				cout << "El mod es diferente de 1, no posee inversa" << endl;
+		}
 		else
-			cout << "El mod de es diferente de 1 no posee inversa" << endl; 
+			cout << "La inversa no puede ser negativa"<<endl;
 	}
 	else
 		cout << "El mcd es diferente de 1, no posee inversa"<<endl;
+	return 0;
 }
 int main()
 {
@@ -70,6 +76,6 @@ int main()
 	cout << "Ingrese a: "; cin >> a;
 	cout << "\nIngrese n: "; cin >> n;
 
-	inversa(a, n);
-	
+	if (inversa(a, n))
+		cout << "la inversa de " << a << " es " << inversa(a,n);
 }
