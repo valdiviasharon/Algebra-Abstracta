@@ -33,8 +33,10 @@ int euclides_ext(int a, int b)
 	};
 
 	s = s1; 
-	t = t1;
-	mcd = r1;
+	if (s < 0)
+	{
+		s = modulo(s, b);
+	}
 	return s;
 }
 int mcd(int a, int b)
@@ -56,13 +58,8 @@ int inversa(int a, int n)
 	if (mcd(n, a) == 1)
 	{
 		int x = euclides_ext(a, n);
-		if (x > 0)
-		{
-			if (modulo(a * x, n) == 1)
-				return x;
-			else
-				cout << "El mod es diferente de 1, no posee inversa" << endl;
-		}
+		if (modulo(a * x, n) == 1)
+			return x;
 		else
 			cout << "La inversa no puede ser negativa"<<endl;
 	}
