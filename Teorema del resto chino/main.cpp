@@ -6,9 +6,9 @@ void llenar_vectores(vector<int>& val_x, vector<int> & val_a,vector<int> & val_p
 	for (int i = 0; i < val_x.size(); i++)
 	{
 		cout << endl << "Ecuacion nro: " << i + 1 << endl;
-		cout << "\tIngrese el valor de x: "; cin >> val_x[i];
-		cout << "\tIngrese el valor de a: "; cin >> val_a[i];
-		cout << "\tIngrese el valor de n: "; cin >> val_p[i];
+		cout << "\tIngrese el coeficiente de x: "; cin >> val_x[i];
+		cout << "\tIngrese el coeficiente de a: "; cin >> val_a[i];
+		cout << "\tIngrese el coeficiente de n: "; cin >> val_p[i];
 	}
 	cout << "\nEcuaciones";
 	for (int i = 0; i < val_x.size(); i++)
@@ -87,14 +87,15 @@ vector<int> resto_chino(int tam)
 	//Hallamos x0
 	int x0 = 0;
 	for (int i = 0; i < tam; i++)
-		x0 += (val_a[i]) * (val_P[i]) * (val_q[i]);
-	
+	{
+		int aux = (modulo(val_a[i], P) * modulo(val_P[i], P) * modulo(val_q[i], P));
+		x0 += modulo(aux, P);
+	}
+		
 	x0 = modulo(x0, P);
 	vector<int> resultado(2);
-	resultado[0] = x0;
-	resultado[1] = P;
+	resultado[0] = x0;    resultado[1] = P;
 	return resultado;
-	
 }
 int main()
 {
