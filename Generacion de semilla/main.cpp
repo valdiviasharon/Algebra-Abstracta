@@ -74,12 +74,12 @@ vector<ZZ> Generar_semilla(ZZ bits)
 		ZZ tiempo(time(NULL));
 		string value = datos_memoria[j];
 		ZZ valor(INIT_VAL, value.c_str());
-		if (modulo(modulo(valor, i), ZZ(2)) == ZZ(1))
-			valor *= tiempo + i;
+		if (modulo(modulo(valor, i), ZZ(2)) == ZZ(1)) //Primero realiza un mod con el valor de memoria obtenido y el valor de i
+			valor *= tiempo + i;                      //Si ese resultado es impar valor*= tiempo + i, sino resta i
 		else
 			valor *= tiempo - i;
 		K.push_back(valor);
-		if (j + 1 == datos_memoria.size())
+		if (j + 1 == datos_memoria.size()) //Va recorriendo el array e iterando los valores que usará, entonces si se pasa del tamaño reinicia la posicion
 			j = -1;
 		j++;
 		Sleep(30);
