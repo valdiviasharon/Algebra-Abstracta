@@ -86,10 +86,40 @@ vector<ZZ> Generar_semilla(ZZ bits)
 	}
 	return K;
 }
+ZZ RC4(ZZ bits)
+{
+	vector<ZZ> K=Generar_semilla(bits);
+	vector<ZZ> S;
+
+	//agregamos a S los numeros de 0 al valor de los bits
+	for (ZZ i(0); i < bits; i++)
+		S.push_back(i);
+
+	ZZ f(0);
+
+	for (long long i = 0, j = 0; i < bits; i++, j++)
+	{
+		f = modulo((f + S[i] + K[j]), bits);
+		long long aux = ZZ_to_longlong(f);
+		swap_values(S[i], S[aux]);
+		if (j + 1 == K.size())
+			j = -1;
+	}
+
+	//ZZ numero(0);
+	//ZZ valor(1);
+
+	//for (long long i = S.size() - 1, j = 0; i >= 0; i--, j++)
+	//{
+	//	if (modulo(S[i], ZZ(2)) == ZZ(1))
+	//		numero += valor;
+	//	valor *= 2;
+	//}
+	//return numero;
+}
 int main()
 {
 	ZZ bits;
 	cout << "Ingrese la cantidad de valores : "; cin >> bits;
-	vector<ZZ>semillas = Generar_semilla(bits);
-	print(semillas);
+	vector<ZZ> semillas = Generar_semilla(bits);
 }
