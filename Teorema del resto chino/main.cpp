@@ -53,7 +53,7 @@ bool valores_correctos(vector<int>& val_x, vector<int>& val_a, vector<int>& val_
 	}
 	return true;
 }
-vector<int> resto_chino(int tam)
+int resto_chino(int tam)
 {
 	vector<int>val_x(tam), val_a(tam), val_p(tam);
 	llenar_vectores(val_x, val_a, val_p);
@@ -93,17 +93,23 @@ vector<int> resto_chino(int tam)
 	}
 		
 	x0 = modulo(x0, P);
-	vector<int> resultado(2);
-	resultado[0] = x0;    resultado[1] = P;
-	return resultado;
+
+	vector<int>ecuacion_general(2);
+	ecuacion_general[0] = x0;    ecuacion_general[1] = P;
+
+	cout << endl << "\nEcuacion general: " << endl;
+	cout << "\tx = " << ecuacion_general[0] << " + " << ecuacion_general[1] << "k";
+	cout << "\nPara k=0" << endl;
+	cout << "\tx = " << ecuacion_general[0] << " + " << ecuacion_general[1] << "(0)";
+	cout << "\nEntonces" << endl;
+	ecuacion_general[1] *= 0;
+	cout << "\tx = " << ecuacion_general[0] << " + " << "0" << endl;
+
+	return ecuacion_general[0] + ecuacion_general[1];
 }
 int main()
 {
 	int num;
 	cout << "\Cuantas ecuaciones ingresara? : "; cin >> num;
-	vector<int>ecuacion_general(2);
-	ecuacion_general=resto_chino(num);
-
-	cout << endl <<"\nEcuacion general: " << endl;
-	cout << "\tx = " << ecuacion_general[0] << " + " << ecuacion_general[1] << "k";
+	cout << endl << "Respuesta: "<<resto_chino(num);
 }
